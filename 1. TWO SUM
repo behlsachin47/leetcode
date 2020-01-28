@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        std::unordered_map<int, int> map1;
+        std::vector<int> result;
+        
+        for (int i=0; i < nums.size(); i++) {
+            if (map1.count(nums[i])) {
+                map1.at(nums[i]) = i;
+            } else {
+                map1.insert({nums[i], i});
+            }
+        }
+        
+        for (int i=0; i < nums.size()-1; i++) {
+            if (map1.count(target - nums[i])) {
+                if (map1[target - nums[i]] != i) {
+                    result.push_back(i);
+                    result.push_back(map1[target - nums[i]]);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+};
